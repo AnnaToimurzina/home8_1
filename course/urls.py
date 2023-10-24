@@ -1,11 +1,11 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from Users.apps import UsersConfig
-from Users.views import CourseViewSet, LessonCreateView, LessonListView, LessonRetrieveAPIView, LessonUpdateAPIView, \
+from course.apps import CourseConfig
+from course.views import CourseViewSet, LessonCreateView, LessonListView, LessonRetrieveAPIView, LessonUpdateAPIView, \
     LessonDestroyAPIView
 
-app_name = UsersConfig.name
+app_name = CourseConfig.name
 
 router = DefaultRouter()
 router.register(r'courses', CourseViewSet, basename='course')
