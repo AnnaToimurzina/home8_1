@@ -11,7 +11,7 @@ router = DefaultRouter()
 router.register(r'courses', CourseViewSet, basename='course')
 
 urlpatterns = [
-        path('lesson/', LessonCreateView.as_view(), name='lesson-list-create'),
+        path('lesson/create', LessonCreateView.as_view(), name='lesson-list-create'),
         path('lesson/list', LessonListView.as_view(), name='lesson-list'),
         path('lesson/<int:pk>/', LessonRetrieveAPIView.as_view(), name='lesson-get'),
         path('lesson/update/<int:pk>/', LessonUpdateAPIView.as_view(), name='lesson-update'),
