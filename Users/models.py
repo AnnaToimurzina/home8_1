@@ -9,7 +9,7 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name='Avatar')
 
     def __str__(self):
-        return self.email, self.phone, self.city, self.avatar
+        return f"{self.username} ({self.email})"
 
     class Meta:
         verbose_name = 'Пользователь'

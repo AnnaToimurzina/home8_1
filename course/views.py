@@ -1,15 +1,29 @@
 from rest_framework import generics, viewsets
 
 from course.models import Lesson, Course, Countlesson
+from course.permissions import IsModeratorReadOnly
 from course.serializer import LessonSerializer, CourseSerializer, CountlessonSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+class CourseCreateView(generics.CreateAPIView):
+    serializer_class = CourseSerializer
+    permission_classes = [IsModeratorReadOnly]
+
+class CourseDestroyAPIView(generics.DestroyAPIView):
+    queryset = Course.objects.all()
+    permission_classes = [IsModeratorReadOnly]
+
+class CourseUpdateAPIView(generics.UpdateAPIView):
+    serializer_class = CourseSerializer
+    queryset = Course.objects.all()
+    permission_classes = [IsModeratorReadOnly]
 
 class LessonCreateView(generics.CreateAPIView):
     serializer_class = LessonSerializer
+    permission_classes = [IsModeratorReadOnly]
 
 class LessonListView(generics.ListCreateAPIView):
     serializer_class = LessonSerializer
@@ -22,9 +36,11 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
 class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    permission_classes = [IsModeratorReadOnly]
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
+    permission_classes = [IsModeratorReadOnly]
 
 class CountlessonCreateView(generics.CreateAPIView):
     serializer_class = CountlessonSerializer
