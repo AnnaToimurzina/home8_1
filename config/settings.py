@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Users',
     'course',
     'payments',
+    'subscription',
     'rest_framework_simplejwt'
 ]
 

@@ -1,13 +1,18 @@
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, serializers
 
 from course.models import Lesson, Course, Countlesson
+from course.paginator import MyPagination
 from course.permissions import IsModeratorReadOnly
 from course.serializer import LessonSerializer, CourseSerializer, CountlessonSerializer
+
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+    pagination_class = MyPagination
+
+
 class CourseCreateView(generics.CreateAPIView):
     serializer_class = CourseSerializer
     permission_classes = [IsModeratorReadOnly]
@@ -28,6 +33,7 @@ class LessonCreateView(generics.CreateAPIView):
 class LessonListView(generics.ListCreateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    pagination_class = MyPagination
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
