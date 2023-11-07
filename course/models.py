@@ -7,10 +7,10 @@ from Users.models import User
 class Lesson(models.Model):
     title_lesson = models.CharField(max_length=100, verbose_name='Название урока')
     description_lesson = models.TextField(verbose_name='Описание урока')
-    preview_lesson = models.ImageField(upload_to='lesson_previews/', null=True, blank=True, verbose_name='Картинка курса')
+    preview_lesson = models.ImageField(upload_to='lesson_previews/', null=True, blank=True,
+                                       verbose_name='Картинка курса')
     video_link = models.URLField(verbose_name='Ссылка на урок')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
 
     def __str__(self):
         return self.description_lesson, self.description_lesson, self.preview_lesson, self.video_link
@@ -18,7 +18,6 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
-
 
 class Course(models.Model):
     title_course = models.CharField(max_length=100, verbose_name='Название курса')
@@ -32,6 +31,9 @@ class Course(models.Model):
     class Meta:
         verbose_name = 'Курс'
         verbose_name_plural = 'Курсы'
+
+
+
 
 class Countlesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE,null=True, blank=True)

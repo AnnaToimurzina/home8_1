@@ -8,14 +8,15 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
+        read_only_fields = ('video_link',)
 
 
 class CourseSerializer(serializers.ModelSerializer):
     count_lesson = serializers.IntegerField(source='countlesson.count_lesson', read_only=True)
 
-    lessons = LessonSerializer(many=True)  # Сериализатор для представления уроков
+    lessons = LessonSerializer(many=True, read_only=True)  # Сериализатор для представления уроков
 
-    is_subscribed = serializers.SerializerMethodField() #информация о подписке текущего пользователя на курс
+    is_subscribed = serializers.SerializerMethodField(read_only=True) #информация о подписке текущего пользователя на курс
 
     def get_is_subscribed(self, obj):
         user = self.context['request'].user

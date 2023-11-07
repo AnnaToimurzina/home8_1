@@ -1,4 +1,5 @@
 from rest_framework import generics, viewsets, serializers
+from rest_framework.permissions import AllowAny
 
 from course.models import Lesson, Course, Countlesson
 from course.paginator import MyPagination
@@ -15,7 +16,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 class CourseCreateView(generics.CreateAPIView):
     serializer_class = CourseSerializer
-    permission_classes = [IsModeratorReadOnly]
+    permission_classes = [AllowAny]
 
 class CourseDestroyAPIView(generics.DestroyAPIView):
     queryset = Course.objects.all()
@@ -28,7 +29,7 @@ class CourseUpdateAPIView(generics.UpdateAPIView):
 
 class LessonCreateView(generics.CreateAPIView):
     serializer_class = LessonSerializer
-    permission_classes = [IsModeratorReadOnly]
+    permission_classes = [AllowAny]
 
 class LessonListView(generics.ListCreateAPIView):
     serializer_class = LessonSerializer
@@ -46,7 +47,7 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
-    permission_classes = [IsModeratorReadOnly]
+    permission_classes = [AllowAny]
 
 class CountlessonCreateView(generics.CreateAPIView):
     serializer_class = CountlessonSerializer
