@@ -1,0 +1,18 @@
+Этот проект представляет собой Django-приложение с использованием PostgreSQL, Redis и Celery, упакованные с помощью Docker Compose.
+
+
+## Запуск проекта
+
+1. Склонируйте репозиторий:
+
+    git clone https://github.com/AnnaToimurzina/home8_1.git
+    cd course
+
+
+2. Запустите проект с помощью Docker Compose:
+docker-compose build
+docker-compose up
+
+3. После успешного запуска, ваше Django-приложение будет доступно по адресу [http://localhost:8000/](http://localhost:8000/).
+
+4. Чтобы остановить проект, выполните команду: docker stop course

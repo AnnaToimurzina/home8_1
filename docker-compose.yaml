@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: Stepa123
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  redis:
+    image: "redis:alpine"
+
+
+  app:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+    depends_on:
+    - db
+    - redis
+    environment:
+      DATABASE_URL: postgres://postgres:Stepa123@db:5432/home8_1
+      REDIS_URL: redis://redis:6379/0  # Подключение к Redis
+
+  celery:
+    build: .
+    command: celery -A course worker -l info
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://postgres:Stepa123@db:5432/home8_1
+      REDIS_URL: redis://redis:6379/0  # Подключение к Redis
